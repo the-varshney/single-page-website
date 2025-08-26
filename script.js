@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Typing Effect
     const typingText = document.querySelector('.typing-effect');
-    const roles = ["Web Developer", "App Developer", "Backend Engineer", "UI/UX Enthusiast"];
+    const roles = ["Artworks", "Poetry", "Paintings", "Literature"];
     let roleIndex = 0;
     let charIndex = 0;
 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (charIndex < roles[roleIndex].length) {
             typingText.textContent += roles[roleIndex].charAt(charIndex);
             charIndex++;
-            setTimeout(type, 100);
+            setTimeout(type, 120);
         } else {
             setTimeout(erase, 2000);
         }
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (charIndex > 0) {
             typingText.textContent = roles[roleIndex].substring(0, charIndex - 1);
             charIndex--;
-            setTimeout(erase, 50);
+            setTimeout(erase, 60);
         } else {
             roleIndex = (roleIndex + 1) % roles.length;
             setTimeout(type, 500);
@@ -60,4 +60,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
+
+    // Modal for images
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById("modalImage");
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+    // Ensure modal is hidden on page load
+    modal.style.display = 'none';
+
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', function() {
+            modal.style.display = "flex";
+            modalImg.src = this.querySelector('img').src;
+        });
+    });
+
+    const close = document.querySelector(".close");
+    close.addEventListener('click', function() {
+        modal.style.display = "none";
+    });
+
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
 });
